@@ -1,0 +1,9 @@
+description: Modified yaml.
+time_units: generations
+demes:
+- name: SouthMiddleAtlas
+  epochs:
+  - start_size: 746148.0
+    end_time: 568344.0
+  - start_size: 100218.0
+    end_time: 0
