@@ -18,6 +18,7 @@ def check_equal_yaml_strings(str1,str2):
         graph1 = demes.loads(str1)
     except KeyError as k:
         print(k)
+        return False
     except Exception as e:
         print(f'Error loading {str1}')
         return False
@@ -25,6 +26,7 @@ def check_equal_yaml_strings(str1,str2):
         graph2 = demes.loads(str2)
     except KeyError as k:
         print(k)
+        return False
     except Exception as e:
         print(f'Error loading {str2}')
         return False
