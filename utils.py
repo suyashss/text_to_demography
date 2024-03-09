@@ -15,14 +15,14 @@ def check_equal_yaml_files(fname1,fname2):
 
 def check_equal_yaml_strings(str1,str2):
     try:
-        graph1 = demes.load(str1)
+        graph1 = demes.loads(str1)
     except KeyError as k:
         print(k)
     except Exception as e:
         print(f'Error loading {str1}')
         return False
     try:
-        graph2 = demes.load(str2)
+        graph2 = demes.loads(str2)
     except KeyError as k:
         print(k)
     except Exception as e:
