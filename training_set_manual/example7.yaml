@@ -1,0 +1,30 @@
+time_units: generations
+demes:
+  - name: {pop1}
+    epochs:
+      - end_time: {time1}
+        start_size: {size1}
+  - name: {pop2}
+    ancestors: [{pop1}]
+    epochs:
+      - start_size: {size2}
+  - name: {pop3}
+    ancestors: [{pop1}]
+    epochs:
+      - start_size: {size3}
+migrations:
+  - source: {pop2}
+    dest: {pop3}
+    rate: {rate1}
+    start_time: {time1}
+    end_time: {time2}
+  - source: {pop3}
+    dest: {pop2}
+    rate: {rate2}
+    start_time: {time3}
+    end_time: {time4}
+  - source: {pop2}
+    dest: {pop3}
+    rate: {rate3}
+    start_time: {time5}
+    end_time: 0

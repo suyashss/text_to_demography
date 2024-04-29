@@ -1,0 +1,1 @@
+Deme {pop1} had an intial size of {size1}. At {time1} generations ago, it gave rise to demes {pop2} and {pop3} and terminated. The intial size of {pop2} was {size2} and that for {pop3} was {size3}. There was migration between the two populations in both directions at rate {rate1} until present time.

@@ -1,0 +1,1 @@
+Deme {pop1} had initial size {size1}. At time {time1} generations ago, it terminated and gave rise to two demes {pop2} with size {size2} and {pop3} with size {size3}. At time {time2}, there was a pulse of admixture from {pop2} to {pop3} with proportion {proportion1}. The demes maintained their sizes since then.

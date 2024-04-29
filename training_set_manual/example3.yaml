@@ -1,0 +1,20 @@
+time_units: generations
+demes:
+  - name: {pop1}
+    start_time: .inf
+    epochs:
+      - start_size: {size1}
+        end_time: {time1}
+        end_size: {size1}
+      - start_size: {size1}
+        end_size: {size2}
+        end_time: {time2}
+        size_function: {changetype1}
+      - start_size: {size2}
+        end_time: {time3}
+        end_size: {size3}
+        size_function: {changetype2}
+      - end_time: 0
+        start_size: {size3}
+        end_size: {size4}
+        size_function: {changetype3}
