@@ -1,5 +1,20 @@
 import demes
 
+def validate_filled_description(description: str):
+    assert description.find("{") == -1, f"Unfilled variable in description: {description}"
+    return True
+
+def validate_filled_yaml(filled_yaml: str):
+    try:
+        ob = demes.loads(filled_yaml)
+    except KeyError as k:
+        print(k)
+        return False
+    except Exception as e:
+        print(f'Error loading {filled_yaml}')
+        return False
+    return True
+
 def check_equal_yaml_files(fname1,fname2):
     try:
         graph1 = demes.load(fname1)
