@@ -1,10 +1,11 @@
-from pydantic import BaseModel, PositiveFloat, ValidationError
+from pydantic import BaseModel, PositiveFloat, PositiveInt, ValidationError
 from typing_extensions import Literal
 from numpy import random
 import numpy as np
 import string
 
-popname_arr = list(string.ascii_uppercase) 
+popname_arr = list(string.ascii_uppercase)
+popname_arr.remove("I") # Remove the letter I from the list of population names
 changetypes = ['linear','exponential']
 
 increase_desc = ['increased','grew']
@@ -27,13 +28,13 @@ def get_size_change_description(size_from,size_to):
 
 class Example1(BaseModel):
     pop1: str
-    size1: PositiveFloat
+    size1: PositiveInt
     
     @classmethod
     def generate_example(cls):
-        high = 10000.0
-        low = 100.0
-        size1 = random.random(1)*(high-low)+low
+        size_high = 10000
+        size_low = 100
+        size1 = random.randint(size_low,size_high)
         pop1 = random.choice(popname_arr)
         data_dict = {'pop1':pop1,'size1':size1}
         return cls(**data_dict)
@@ -41,17 +42,17 @@ class Example1(BaseModel):
 
 class Example2(BaseModel):
     pop1: str
-    size1: PositiveFloat
-    size2: PositiveFloat
+    size1: PositiveInt
+    size2: PositiveInt
     size1_to_size2_description: Literal[tuple(change_desc)]
     size1_to_size2_description_present: Literal[tuple(change_desc_present)]
     time1: PositiveFloat
     
     @classmethod
     def generate_example(cls):
-        size_low, size_high = 100.0, 10000.0
+        size_low, size_high = 100, 10000
         time_low, time_high = 10.0, 10000.0
-        size1, size2 = random.random(2)*(size_high-size_low)+size_low
+        size1, size2 = random.randint(size_low,size_high,size=2)
         time1 = random.random()*(time_high-time_low)+time_low
         pop1 = random.choice(popname_arr)
         size1_to_size2_description, size1_to_size2_description_present = get_size_change_description(size1,size2)
@@ -62,10 +63,10 @@ class Example2(BaseModel):
 
 class Example3(BaseModel):
     pop1: str
-    size1: PositiveFloat
-    size2: PositiveFloat
-    size3: PositiveFloat
-    size4: PositiveFloat
+    size1: PositiveInt
+    size2: PositiveInt
+    size3: PositiveInt
+    size4: PositiveInt
     size1_to_size2_description: Literal[tuple(change_desc)]
     size1_to_size2_description_present: Literal[tuple(change_desc_present)]
     size2_to_size3_description: Literal[tuple(change_desc)]
@@ -81,9 +82,9 @@ class Example3(BaseModel):
     
     @classmethod
     def generate_example(cls):
-        size_low, size_high = 100.0, 10000.0
+        size_low, size_high = 100, 10000
         time_low, time_high = 10.0, 10000.0
-        size1, size2, size3, size4 = random.random(4)*(size_high-size_low)+size_low
+        size1, size2, size3, size4 = random.randint(size_low,size_high,size=4)
         time1, time2, time3 = [x*(time_high-time_low)+time_low for x in sorted(random.random(3),reverse=True)]
         pop1 = random.choice(popname_arr)
         size1_to_size2_description, size1_to_size2_description_present = get_size_change_description(size1,size2)
@@ -110,16 +111,16 @@ class Example4(BaseModel):
     pop1: str
     pop2: str
     pop3: str
-    size1: PositiveFloat
-    size2: PositiveFloat
-    size3: PositiveFloat
+    size1: PositiveInt
+    size2: PositiveInt
+    size3: PositiveInt
     time1: PositiveFloat
     
     @classmethod
     def generate_example(cls):
-        size_low, size_high = 100.0, 10000.0
+        size_low, size_high = 100, 10000
         time_low, time_high = 10.0, 10000.0
-        size1, size2, size3 = random.random(3)*(size_high-size_low)+size_low
+        size1, size2, size3 = random.randint(size_low,size_high,size=3)
         time1 = random.random()*(time_high-time_low)+time_low
         pop1, pop2, pop3 = random.choice(popname_arr,3, replace = False)
         data_dict = {'pop1':pop1,'pop2':pop2,'pop3':pop3,
@@ -130,15 +131,15 @@ class Example4(BaseModel):
 class Example5(BaseModel):
     pop1: str
     pop2: str
-    size1: PositiveFloat
-    size2: PositiveFloat
+    size1: PositiveInt
+    size2: PositiveInt
     time1: PositiveFloat
     
     @classmethod
     def generate_example(cls):
-        size_low, size_high = 100.0, 10000.0
+        size_low, size_high = 100, 10000
         time_low, time_high = 10.0, 10000.0
-        size1, size2 = random.random(2)*(size_high-size_low)+size_low
+        size1, size2 = random.randint(size_low,size_high,size=2)
         time1 = random.random()*(time_high-time_low)+time_low
         pop1, pop2 = random.choice(popname_arr,2, replace = False)
         data_dict = {'pop1':pop1,'pop2':pop2,
@@ -150,9 +151,9 @@ class Example6(BaseModel):
     pop1: str
     pop2: str
     pop3: str
-    size1: PositiveFloat
-    size2: PositiveFloat
-    size3: PositiveFloat
+    size1: PositiveInt
+    size2: PositiveInt
+    size3: PositiveInt
     time1: PositiveFloat
     proportion1: PositiveFloat
     proportion2: PositiveFloat
@@ -161,7 +162,7 @@ class Example6(BaseModel):
     def generate_example(cls):
         size_low, size_high = 100.0, 10000.0
         time_low, time_high = 10.0, 10000.0
-        size1, size2, size3 = random.random(3)*(size_high-size_low)+size_low
+        size1, size2, size3 = random.randint(size_low,size_high,size=3)
         time1 = random.random()*(time_high-time_low)+time_low
         proportion1 = random.random()
         proportion2 = 1 - proportion1
@@ -176,9 +177,9 @@ class Example7(BaseModel):
     pop1: str
     pop2: str
     pop3: str
-    size1: PositiveFloat
-    size2: PositiveFloat
-    size3: PositiveFloat
+    size1: PositiveInt
+    size2: PositiveInt
+    size3: PositiveInt
     time1: PositiveFloat
     time2: PositiveFloat
     time3: PositiveFloat
@@ -190,9 +191,9 @@ class Example7(BaseModel):
 
     @classmethod
     def generate_example(cls):
-        size_low, size_high = 100.0, 10000.0
+        size_low, size_high = 100, 10000
         time_low, time_high = 10.0, 10000.0
-        size1, size2, size3 = random.random(3)*(size_high-size_low)+size_low
+        size1, size2, size3 = random.randint(size_low,size_high,size=3)
         time1, time2, time3, time4, time5 = [x*(time_high-time_low)+time_low for x \
                                              in sorted(random.random(5),reverse=True)]
         rate1, rate2, rate3 = random.random(3)
@@ -207,17 +208,17 @@ class Example8(BaseModel):
     pop1: str
     pop2: str
     pop3: str
-    size1: PositiveFloat
-    size2: PositiveFloat
-    size3: PositiveFloat
+    size1: PositiveInt
+    size2: PositiveInt
+    size3: PositiveInt
     time1: PositiveFloat
     rate1: PositiveFloat
     
     @classmethod
     def generate_example(cls):
-        size_low, size_high = 100.0, 10000.0
+        size_low, size_high = 100, 10000
         time_low, time_high = 10.0, 10000.0
-        size1, size2, size3 = random.random(3)*(size_high-size_low)+size_low
+        size1, size2, size3 = random.randint(size_low,size_high,size=3)
         time1 = random.random()*(time_high-time_low)+time_low
         rate1 = random.random()
         pop1, pop2, pop3 = random.choice(popname_arr,3, replace = False)
@@ -230,18 +231,18 @@ class Example9(BaseModel):
     pop1: str
     pop2: str
     pop3: str
-    size1: PositiveFloat
-    size2: PositiveFloat
-    size3: PositiveFloat
+    size1: PositiveInt
+    size2: PositiveInt
+    size3: PositiveInt
     time1: PositiveFloat
     time2: PositiveFloat
     proportion1: PositiveFloat
     
     @classmethod
     def generate_example(cls):
-        size_low, size_high = 100.0, 10000.0
+        size_low, size_high = 100, 10000
         time_low, time_high = 10.0, 10000.0
-        size1, size2, size3 = random.random(3)*(size_high-size_low)+size_low
+        size1, size2, size3 = random.randint(size_low,size_high,size=3)
         time1, time2 = [x*(time_high-time_low)+time_low for x in sorted(random.random(2),reverse=True)]
         proportion1 = random.random()
         pop1, pop2, pop3 = random.choice(popname_arr,3, replace = False)
