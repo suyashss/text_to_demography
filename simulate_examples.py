@@ -79,8 +79,8 @@ print(np.sum(['{' in x for x in example_df['Description']]))
 
 indices = np.arange(len(example_df))
 random.shuffle(indices)
-train_fraction = 0.8
-valid_fraction = 0.1
+train_fraction = 0.9
+valid_fraction = 0.05
 train_max_index = int(len(example_df)*train_fraction)
 valid_max_index = train_max_index + int(len(example_df)*valid_fraction)
 
