@@ -2,7 +2,6 @@ import demes
 import numpy as np 
 from numpy import random
 import pandas as pd
-#from example_defs import Example1, Example2, Example3
 from utils import validate_filled_description, validate_filled_yaml
 import example_defs
 from datasets import Dataset
@@ -41,34 +40,6 @@ for i in range(1,10):
     desc_entries += curr_desc_entries
     yaml_entries += curr_yaml_entries
 
-""" yamlstr = open("training_set_manual/example2.yaml").read().strip()
-description_list = [open("training_set_manual/example2.description").read().strip()] + \
-    [x.strip().strip('"') for x in open("training_set_manual/example2.description.alts").readlines()]
-
-print("Simulating Example2")
-for i in range(num_examples):
-    example = Example2.generate_example()
-    filled_yaml = yamlstr.format(**dict(example)) 
-    description = random.choice(description_list)
-    filled_description = description.format(**dict(example)) 
-    ob = demes.loads(filled_yaml)
-    desc_entries.append(filled_description)
-    yaml_entries.append(filled_yaml)
-
-yamlstr = open("training_set_manual/example3.yaml").read().strip()
-description_list = [open("training_set_manual/example3.description").read().strip()] + \
-    [x.strip().strip('"') for x in open("training_set_manual/example3.description.alts").readlines()]
-
-print("Simulating Example3")
-for i in range(num_examples):
-    example = Example3.generate_example()
-    filled_yaml = yamlstr.format(**dict(example)) 
-    description = random.choice(description_list)
-    filled_description = description.format(**dict(example)) 
-    ob = demes.loads(filled_yaml)
-    desc_entries.append(filled_description)
-    yaml_entries.append(filled_yaml)
- """
 example_dict = {'Description':desc_entries,
                 'YAML':yaml_entries}    
 example_df = pd.DataFrame(example_dict)
@@ -90,7 +61,7 @@ test_df = example_df.iloc[valid_max_index:]
 
 print(f"Sizes of train/valid/test df are:{len(train_df)},{len(valid_df)},{len(test_df)}")
 
-""" hf_dataset = "suyashss/synthetic_demography"
+hf_dataset = "suyashss/synthetic_demography"
 print(f"Loading {hf_dataset}")
 
 train_dataset = Dataset.from_pandas(train_df)
@@ -103,4 +74,3 @@ test_dataset = Dataset.from_pandas(test_df)
 test_dataset.push_to_hub(hf_dataset,split='test')
 
 print(f"Completed push to {hf_dataset}")
- """
