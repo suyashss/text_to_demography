@@ -10,7 +10,7 @@ from datasets import Dataset
 np.random.seed(42)
 desc_entries = []
 yaml_entries = []
-num_examples = 10
+num_examples = 10000
 
 def generate_example_from_class(class_name,yamlstr,description_list):
     current_desc_entries = []
