@@ -16,6 +16,10 @@ change_desc_map = {'increased':'increase', 'grew':'growth','decreased':'decrease
                        'reduced':'reduction', 'changed':'change'}
 change_desc_present = list(change_desc_map.values())
 
+def round_number(f):
+    arr = [1,2,3,4,5]
+    return np.round(f,np.random.choice(arr))
+
 
 def get_size_change_description(size_from,size_to):
     if random.random() < 0.5:
@@ -53,7 +57,7 @@ class Example2(BaseModel):
         size_low, size_high = 100, 10000
         time_low, time_high = 10.0, 10000.0
         size1, size2 = random.randint(size_low,size_high,size=2)
-        time1 = random.random()*(time_high-time_low)+time_low
+        time1 = round_number(random.random()*(time_high-time_low)+time_low)
         pop1 = random.choice(popname_arr)
         size1_to_size2_description, size1_to_size2_description_present = get_size_change_description(size1,size2)
         data_dict = {'pop1':pop1,'size1':size1, 'size2':size2, 'time1': time1, 
@@ -86,6 +90,7 @@ class Example3(BaseModel):
         time_low, time_high = 10.0, 10000.0
         size1, size2, size3, size4 = random.randint(size_low,size_high,size=4)
         time1, time2, time3 = [x*(time_high-time_low)+time_low for x in sorted(random.random(3),reverse=True)]
+        time1, time2, time3 = round_number(time1),round_number(time2),round_number(time3)
         pop1 = random.choice(popname_arr)
         size1_to_size2_description, size1_to_size2_description_present = get_size_change_description(size1,size2)
         size2_to_size3_description, size2_to_size3_description_present = get_size_change_description(size2,size3)
@@ -122,6 +127,7 @@ class Example4(BaseModel):
         time_low, time_high = 10.0, 10000.0
         size1, size2, size3 = random.randint(size_low,size_high,size=3)
         time1 = random.random()*(time_high-time_low)+time_low
+        time1 = round_number(time1)
         pop1, pop2, pop3 = random.choice(popname_arr,3, replace = False)
         data_dict = {'pop1':pop1,'pop2':pop2,'pop3':pop3,
                      'size1':size1, 'size2':size2, 'size3':size3,
@@ -141,6 +147,7 @@ class Example5(BaseModel):
         time_low, time_high = 10.0, 10000.0
         size1, size2 = random.randint(size_low,size_high,size=2)
         time1 = random.random()*(time_high-time_low)+time_low
+        time1 = round_number(time1)
         pop1, pop2 = random.choice(popname_arr,2, replace = False)
         data_dict = {'pop1':pop1,'pop2':pop2,
                      'size1':size1, 'size2':size2,
@@ -164,6 +171,7 @@ class Example6(BaseModel):
         time_low, time_high = 10.0, 10000.0
         size1, size2, size3 = random.randint(size_low,size_high,size=3)
         time1 = random.random()*(time_high-time_low)+time_low
+        time1 = round_number(time1)
         proportion1 = random.random()
         proportion2 = 1 - proportion1
         pop1, pop2, pop3 = random.choice(popname_arr,3, replace = False)
@@ -196,7 +204,10 @@ class Example7(BaseModel):
         size1, size2, size3 = random.randint(size_low,size_high,size=3)
         time1, time2, time3, time4, time5 = [x*(time_high-time_low)+time_low for x \
                                              in sorted(random.random(5),reverse=True)]
+        time1, time2, time3 = round_number(time1),round_number(time2),round_number(time3)
+        time4, time5 = round_number(time4),round_number(time5)
         rate1, rate2, rate3 = random.random(3)
+        rate1, rate2, rate3 = round_number(rate1),round_number(rate2),round_number(rate3)
         pop1, pop2, pop3 = random.choice(popname_arr,3, replace = False)
         data_dict = {'pop1':pop1,'pop2':pop2,'pop3':pop3,
                      'rate1':rate1,'rate2':rate2,'rate3':rate3,
@@ -220,7 +231,9 @@ class Example8(BaseModel):
         time_low, time_high = 10.0, 10000.0
         size1, size2, size3 = random.randint(size_low,size_high,size=3)
         time1 = random.random()*(time_high-time_low)+time_low
+        time1 = round_number(time1)
         rate1 = random.random()
+        rate1 = round_number(rate1)
         pop1, pop2, pop3 = random.choice(popname_arr,3, replace = False)
         data_dict = {'pop1':pop1,'pop2':pop2,'pop3':pop3,
                      'rate1':rate1,'time1': time1,
@@ -244,7 +257,9 @@ class Example9(BaseModel):
         time_low, time_high = 10.0, 10000.0
         size1, size2, size3 = random.randint(size_low,size_high,size=3)
         time1, time2 = [x*(time_high-time_low)+time_low for x in sorted(random.random(2),reverse=True)]
+        time1, time2 = round_number(time1), round_number(time2)
         proportion1 = random.random()
+        proportion1 = round_number(proportion1)
         pop1, pop2, pop3 = random.choice(popname_arr,3, replace = False)
         data_dict = {'pop1':pop1,'pop2':pop2,'pop3':pop3,
                      'proportion1':proportion1,
