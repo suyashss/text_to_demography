@@ -9,16 +9,18 @@ from datasets import Dataset
 np.random.seed(42)
 desc_entries = []
 yaml_entries = []
-num_examples = 10000
+num_examples_base = 10000
 
-def generate_example_from_class(class_name,yamlstr,description_list):
+def generate_example_from_class(class_name,yamlstr,description_list,num_examples=1000):
     current_desc_entries = []
     current_yaml_entries = []
     if hasattr(example_defs, class_name):
         class_ref = getattr(example_defs, class_name)
+        field_names = class_ref.__fields__.keys()
+        num_fields = len([x for x in field_names if 'description' not in x and 'change' not in x])
     else:
         raise ValueError(f"Class {class_name} not found!")
-    for i in range(num_examples):
+    for i in range(num_examples * num_fields):
         example = class_ref.generate_example()
         filled_yaml = yamlstr.format(**dict(example)) 
         description = random.choice(description_list)
