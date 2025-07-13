@@ -27,7 +27,8 @@ def generate_example_from_class(class_name,yamlstr,description_list,num_examples
         filled_description = description.format(**dict(example)) 
         if not validate_filled_description(filled_description):
             continue
-        validate_filled_yaml(filled_yaml)
+        if not validate_filled_yaml(filled_yaml):
+            continue
         current_desc_entries.append(filled_description)
         current_yaml_entries.append(filled_yaml)
     return current_desc_entries,current_yaml_entries
