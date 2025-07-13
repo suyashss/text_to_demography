@@ -167,7 +167,7 @@ class Example6(BaseModel):
     
     @classmethod
     def generate_example(cls):
-        size_low, size_high = 100.0, 10000.0
+        size_low, size_high = 100, 10000
         time_low, time_high = 10.0, 10000.0
         size1, size2, size3 = random.randint(size_low,size_high,size=3)
         time1 = random.random()*(time_high-time_low)+time_low
